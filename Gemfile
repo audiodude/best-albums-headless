@@ -51,6 +51,9 @@ gem "bootsnap", require: false
 # Devise for user/account creation and management.
 gem 'devise'
 
+# For outgoing RPC requests
+gem 'httpclient'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
