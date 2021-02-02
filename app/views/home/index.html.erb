@@ -1,1 +1,4 @@
-<h1>Hello from home#index</h1>
+<% if user_signed_in? %>
+   <p>Logged in as <%= current_user.email %>.</p>
+   <p><%= link_to 'View all albums', albums_index_path %></p>
+<% end %>
