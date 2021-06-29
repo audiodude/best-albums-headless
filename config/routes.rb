@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'albums/edit'
   get 'albums/update'
   get 'albums/destroy'
+  resources :albums
   get 'albums/search'
   devise_for :users
 

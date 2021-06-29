@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
   <p>Logged in as <%= current_user.email %> (<%= link_to "logout", destroy_user_session_path, method: :delete %>).</p>
-  <p><%= link_to 'View all albums', albums_index_path %></p>
+  <p><%= link_to 'View all albums', albums_path %></p>
 <% else %>
   <%= link_to "Login", new_user_session_path %>
 <% end %>

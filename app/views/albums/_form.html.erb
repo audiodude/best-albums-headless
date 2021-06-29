@@ -1,0 +1,46 @@
+<div>
+  <%= form_for @album do |f|%>
+    <div>
+      <%= f.label :title, 'Title'%>
+      <%= f.text_field :title %>
+    </div>
+
+    <div>
+      <%= f.label :artist, 'Artist'%>
+      <%= f.text_field :artist %>
+    </div>
+
+    <div>
+      <%= f.label :date, 'Release Date'%>
+      <%= f.text_field :date %>
+    </div>
+
+    <div>
+      <%= f.label :link, 'Link'%>
+      <%= f.text_field :link %>
+    </div>
+    
+    <div>
+      <%= f.label :qid, 'QID'%>
+      <%= f.text_field :qid %>
+    </div>
+    
+    <div>
+      <%= f.label :mbid, 'Musicbrainz ID'%>
+      <%= f.text_field :mbid %>
+    </div>
+    
+    <div>
+      <%= f.label :spotify_id, 'Spotify ID'%>
+      <%= f.text_field :spotify_id %>
+    </div>
+
+    <div>
+      <%= f.text_area :description, :rows => 8, :cols => 50 %>
+    </div>
+
+    <div>
+      <%= f.submit 'Create or Update' %>
+    </div>
+  <% end %>
+</div>
