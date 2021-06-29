@@ -2,24 +2,47 @@ class AlbumsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @albums = Album.all
   end
 
   def new
+    @album = Album.new
   end
 
   def create
+    @album = Album.new(album_params)
+    @album.slug = "#{@album.artist} #{@album.title}".parameterize[0..40]
+
+    if @album.save
+      redirect_to albums_path
+    else
+      render :new
+    end
   end
 
   def show
+    @album = Album.find(params[:id])
   end
 
   def edit
+    @album = Album.find(params[:id])
   end
 
   def update
+    @album = Album.find(params[:id])
+    @album.slug = "#{@album.artist} #{@album.title}".parameterize[0..40]
+    @album.update(album_params)
+
+    if @album.save
+      redirect_to album_path(@album)
+    end
   end
 
   def destroy
+    @album = Album.find(params[:id])
+    @album.destroy
+
+    redirect_to albums_path
   end
 
   def search
@@ -84,6 +107,10 @@ class AlbumsController < ApplicationController
   end
 
   private
+
+  def album_params
+    params.require(:album).permit(:title, :artist, :date, :link, :description, :qid, :mbid, :spotify_id)
+  end
 
   def parse_date(date)
     year, month, day = date.split('T')[0].split('-')
