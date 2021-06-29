@@ -33,8 +33,9 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  # Store development files in s3, so I don't have to figure out what environment I'm in before
+  # uploading them.
+  config.active_storage.service = :s3_public
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
