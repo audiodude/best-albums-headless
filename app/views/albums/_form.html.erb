@@ -40,6 +40,16 @@
     </div>
 
     <div>
+      <%= f.label :cover, 'Direct Upload Cover'%>
+      <%= f.file_field :cover, direct_upload: true %>
+    </div>
+
+    <div>
+      <%= f.label :cover_url, 'Cover Url (overrides direct upload)'%>
+      <%= f.text_field :cover_url %>
+    </div>
+
+    <div>
       <%= f.submit 'Create or Update' %>
     </div>
   <% end %>

@@ -11,8 +11,7 @@ class AlbumsController < ApplicationController
 
   def create
     @album = Album.new(album_params)
-    @album.slug = "#{@album.artist} #{@album.title}".parameterize[0..40]
-
+    @album.update_cover if !@album.cover_url.nil?
     if @album.save
       redirect_to albums_path
     else
@@ -30,7 +29,7 @@ class AlbumsController < ApplicationController
 
   def update
     @album = Album.find(params[:id])
-    @album.slug = "#{@album.artist} #{@album.title}".parameterize[0..40]
+    @album.update_cover if !@album.cover_url.nil?
     @album.update(album_params)
 
     if @album.save
@@ -109,7 +108,7 @@ class AlbumsController < ApplicationController
   private
 
   def album_params
-    params.require(:album).permit(:title, :artist, :date, :link, :description, :qid, :mbid, :spotify_id)
+    params.require(:album).permit(:title, :artist, :date, :link, :description, :qid, :mbid, :spotify_id, :cover, :cover_url)
   end
 
   def parse_date(date)
