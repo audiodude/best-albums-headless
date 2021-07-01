@@ -3,7 +3,7 @@ class Album < ApplicationRecord
   before_validation :update_slug
 
   def update_slug
-    self.slug = "#{artist} #{title}".parameterize[0..40]
+    self.slug = "#{artist} #{title}".parameterize.split('-')[0..3].join('-')
   end
 
   def update_cover!
