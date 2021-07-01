@@ -8,8 +8,19 @@ namespace :legacy_albums do
       legacy['title'] = legacy['album']
       legacy.delete('album')
 
+      legacy['cover_url'] = legacy['photo_url_lg']
+      legacy.delete('photo_url_lg')
+      legacy.delete('photo_url_sm')
+
+      legacy['created_at'] = DateTime.strptime(legacy['timestamp'].to_s,'%s')
+      legacy.delete('timestamp')
+
+      legacy.delete('slug')
+      legacy.delete('mini-slug')
+
       album = Album.new(legacy)
-      # album.save!
+      album.update_cover!
+      album.save!
     }
   end
 

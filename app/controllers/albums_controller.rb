@@ -11,7 +11,7 @@ class AlbumsController < ApplicationController
 
   def create
     @album = Album.new(album_params)
-    @album.update_cover if !@album.cover_url.nil?
+    @album.update_cover! unless @album.cover_url.nil?
     if @album.save
       redirect_to albums_path
     else
@@ -29,7 +29,7 @@ class AlbumsController < ApplicationController
 
   def update
     @album = Album.find(params[:id])
-    @album.update_cover if !@album.cover_url.nil?
+    @album.update_cover! unless @album.cover_url.nil?
     @album.update(album_params)
 
     if @album.save

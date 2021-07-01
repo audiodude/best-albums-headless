@@ -40,7 +40,11 @@
     </div>
 
     <div>
+    <% if !@album.description.nil? %>
       <%= markdown(@album.description) %>
+    <% else %>
+      <%= @album.html.html_safe %>
+    <% end %>
     </div>
 </div>
 

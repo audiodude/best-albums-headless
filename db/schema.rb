@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_30_060102) do
+ActiveRecord::Schema.define(version: 2021_07_01_022045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2021_06_30_060102) do
     t.string "spotify_id"
     t.string "qid"
     t.string "cover_url"
+    t.string "html"
   end
 
   create_table "users", force: :cascade do |t|
