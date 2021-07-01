@@ -40,6 +40,15 @@
     </div>
 
     <div>
+      <b>Cover URL</b>
+      <%= @album.cover_url %>
+    </div>
+
+    <div>
+      <%= image_tag url_for(@album.cover) %>
+    </div>
+
+    <div>
     <% if !@album.description.nil? %>
       <%= markdown(@album.description) %>
     <% else %>
