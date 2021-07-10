@@ -3,6 +3,11 @@ class AlbumsController < ApplicationController
 
   def index
     @albums = Album.all
+
+    respond_to {|format|
+      format.html
+      format.json { render json: @albums.to_json(except: [:id]) }
+    }
   end
 
   def new

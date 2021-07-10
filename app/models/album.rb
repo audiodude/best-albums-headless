@@ -1,6 +1,6 @@
 class Album < ApplicationRecord
   has_one_attached :cover
-  before_validation :update_slug, :update_cover_url
+  before_validation :update_slug, :update_cover_url, :update_html
 
   def update_slug
     self.slug = "#{artist} #{title}".parameterize.split('-')[0..3].join('-')
