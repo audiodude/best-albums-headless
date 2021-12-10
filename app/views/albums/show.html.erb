@@ -44,9 +44,11 @@
       <%= @album.cover_url %>
     </div>
 
-    <div>
-      <%= image_tag url_for(@album.cover) %>
-    </div>
+    <% if @album.cover.url %>
+      <div>
+        <%= image_tag url_for(@album.cover) %>
+      </div>
+    <% end %>
 
     <div>
       <%= @album.html.html_safe %>
