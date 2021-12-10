@@ -6,7 +6,9 @@ class AlbumsController < ApplicationController
 
     respond_to {|format|
       format.html
-      format.json { render json: @albums.to_json(except: [:id]) }
+      format.json {
+        render json: @albums.map {|a| a.to_legacy_dict }
+      }
     }
   end
 
