@@ -24,6 +24,21 @@ class Album < ApplicationRecord
   end
 
   def update_html
-    self.html = Markdown.new(description).to_html
+    self.html = Markdown.new(description).to_html unless description.nil?
+  end
+
+  def to_legacy_dict
+    return {
+      artist: artist,
+      album: title,
+      link: link,
+      spotify_id: spotify_id,
+      photo_url_sm: cover.url,
+      photo_url_lg: cover.url,
+      timestamp: created_at.to_time.to_i,
+      slug: slug,
+      'mini-slug': slug.split('-')[0,4].join('-'),
+      html: html,
+    }
   end
 end
