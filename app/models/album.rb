@@ -9,15 +9,21 @@ class Album < ApplicationRecord
   def update_cover_url
     return unless cover_url.empty?
 
-    puts 'Updating cover url'
-    self.cover_url = "http://coverartarchive.org/release-group/#{mbid.strip}/front-500"
+    self.cover_url = "https://coverartarchive.org/release-group/#{mbid.strip}/front-500"
   end
 
   def update_cover!
-    return if cover_url.empty? || cover.attached?
+    if cover_url.empty? || cover.attached?
+      puts('Cover url is empty or cover was explicitly attached, returning')
+      return
+    end
 
     client = HTTPClient.new(default_header: {'User-Agent' => 'BestAlbumsBot 0.1.0/Audiodude <audiodude@gmail.com>'})
     file = StringIO.new(client.get_content(cover_url))
     self.cover.attach(io: file, filename: "cover#{cover_url[-4]}")
+  end
+
+  def update_html
+    self.html = Markdown.new(description).to_html
   end
 end
