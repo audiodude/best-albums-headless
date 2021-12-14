@@ -27,6 +27,8 @@ namespace :best_albums do
 
   desc 'Generate the albums.json file and place it in _site'
   task build: :environment do
-
+    File.open('_site/albums.json', 'w') {|f|
+      f.write({albums: Album.json}.to_json)
+    } 
   end
 end
