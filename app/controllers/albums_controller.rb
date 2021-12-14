@@ -3,7 +3,7 @@ class AlbumsController < ApplicationController
 
   def index
     respond_to {|format|
-      format.html { @albums = Album.all }
+      format.html { @albums = Album.all.order('created_at DESC') }
       format.json {
         render json: Album.json
       }

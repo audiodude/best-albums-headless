@@ -2,7 +2,7 @@
 
 <ul>
   <% @albums.each do |album| %>
-    <li><%= link_to album.title, album %> [<%= link_to 'delete', album, method: :delete %>]</li>
+    <li><%= link_to "#{album.artist} - #{album.title}", album %> [<%= link_to 'delete', album, method: :delete %>]</li>
   <% end %>
 </ul>
 
