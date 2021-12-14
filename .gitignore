@@ -30,3 +30,7 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+# Don't commit a version of the albums to version control.
+albums.json
+# Local Netlify folder
+.netlify
