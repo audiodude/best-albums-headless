@@ -2,6 +2,10 @@ class Album < ApplicationRecord
   has_one_attached :cover
   before_validation :update_slug, :update_cover_url, :update_html
 
+  def self.json
+    Album.all.order('created_at').map(&:to_legacy_dict)
+  end
+
   def update_slug
     self.slug = "#{artist} #{title}".parameterize.split('-')[0..3].join('-')
   end
