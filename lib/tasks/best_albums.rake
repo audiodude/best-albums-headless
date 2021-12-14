@@ -27,4 +27,6 @@ namespace :best_albums do
 
   desc 'Generate the albums.json file and place it in _site'
   task build: :environment do
+
+  end
 end
