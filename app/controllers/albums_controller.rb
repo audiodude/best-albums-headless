@@ -2,11 +2,11 @@ class AlbumsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @albums = Album.all
+    
     respond_to {|format|
-      format.html
+      format.html { @albums = Album.all }
       format.json {
-        render json: @albums.map {|a| a.to_legacy_dict }
+        render json: Album.json
       }
     }
   end
