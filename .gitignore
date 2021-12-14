@@ -37,3 +37,5 @@ yarn-debug.log*
 
 # Don't commit a version of the albums to version control.
 albums.json
+# Local Netlify folder
+.netlify
