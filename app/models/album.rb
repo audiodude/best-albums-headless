@@ -23,6 +23,8 @@ class Album < ApplicationRecord
     end
 
     client = HTTPClient.new(default_header: {'User-Agent' => 'BestAlbumsBot 0.1.0/Audiodude <audiodude@gmail.com>'})
+    client.ssl_config.clear_cert_store
+    client.ssl_config.add_trust_ca('/usr/local/etc/openssl@1.1/cert.pem')
     file = StringIO.new(client.get_content(cover_url))
     self.cover.attach(io: file, filename: "cover#{cover_url[-4]}")
   end
