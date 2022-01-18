@@ -39,3 +39,6 @@ yarn-debug.log*
 albums.json
 # Local Netlify folder
 .netlify
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
