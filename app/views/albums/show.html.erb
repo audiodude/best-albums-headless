@@ -1,58 +1,62 @@
-<div>
-    <div>
-      <b>Title</b>
-      <%= link_to @album.title, @album.link %>
-    </div>
-
-    <div>
-      <b>Artist</b>
-      <%= @album.artist %>
-    </div>
-
-    <div>
-      <b>Release Date</b>
-      <%= @album.date%>
-    </div>
-    
-    <div>
-      <b>Slug</b>
-      <%= @album.slug %>
-    </div>
-
-    <div>
-      <b>Created at</b>
-      <%= @album.created_at%>
-    </div>
-
-    <div>
-      <b>QID</b>
-      <%= @album.qid %>
-    </div>
-    
-    <div>
-      <b>Musicbrainz ID</b>
-      <%= @album.mbid %>
-    </div>
-    
-    <div>
-      <b>Spotify ID</b>
-      <%= @album.spotify_id %>
-    </div>
-
-    <div>
-      <b>Cover URL</b>
-      <%= @album.cover_url %>
-    </div>
-
-    <% if @album.cover.url %>
+<div class="row">
+    <div class="col">
       <div>
-        <%= image_tag url_for(@album.cover) %>
+        <%= link_to @album.title, @album.link %>
       </div>
-    <% end %>
+      
+      <div>
+        <%= @album.artist %>
+      </div>
 
-    <div>
-      <%= @album.html.html_safe %>
+      <div>
+        <b>Slug</b>
+        <%= @album.slug %>
+      </div>
+    </div>
+
+    <div class="col">
+      <div>
+        <b>Release Date</b>
+        <%= @album.date%>
+      </div>
+    
+      <div>
+        <b>Created at</b>
+        <%= @album.created_at%>
+      </div>
+
+      <div>
+        <b>QID</b>
+        <%= @album.qid %>
+      </div>
+      
+      <div>
+        <b>Musicbrainz ID</b>
+        <%= @album.mbid %>
+      </div>
+      
+      <div>
+        <b>Spotify ID</b>
+        <%= @album.spotify_id %>
+      </div>
     </div>
 </div>
 
-<%= link_to 'Edit', edit_album_path %>
+<div class="row">
+    <div>
+      <%= @album.cover_url %>
+    </div>
+      <% if @album.cover.url %>
+        <div>
+          <%= image_tag url_for(@album.cover) %>
+        </div>
+      <% end %>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <%= @album.html.html_safe %>
+  </div>
+</div>
+
+<%= button_to 'Edit', edit_album_path, method: :get, class: 'btn btn-primary' %>
