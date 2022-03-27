@@ -1,56 +1,58 @@
-<div>
+<div class="row">
+  <div class="col-6">
   <%= form_for @album do |f|%>
-    <div>
-      <%= f.label :title, 'Title'%>
-      <%= f.text_field :title %>
+    <div class="mb-3">
+      <%= f.label :title, 'Title', class: 'form-label' %>
+      <%= f.text_field :title, class: 'form-control' %>
     </div>
 
-    <div>
-      <%= f.label :artist, 'Artist'%>
-      <%= f.text_field :artist %>
+    <div class="mb-3">
+      <%= f.label :artist, 'Artist', class: 'form-label' %>
+      <%= f.text_field :artist, class: 'form-control' %>
     </div>
 
-    <div>
-      <%= f.label :date, 'Release Date'%>
-      <%= f.text_field :date %>
+    <div class="mb-3">
+      <%= f.label :date, 'Release Date', class: 'form-label' %>
+      <%= f.text_field :date, class: 'form-control' %>
     </div>
 
-    <div>
-      <%= f.label :link, 'Link'%>
-      <%= f.text_field :link %>
+    <div class="mb-3">
+      <%= f.label :link, 'Link', class: 'form-label' %>
+      <%= f.text_field :link, class: 'form-control' %>
     </div>
     
-    <div>
-      <%= f.label :qid, 'QID'%>
-      <%= f.text_field :qid %>
+    <div class="mb-3">
+      <%= f.label :qid, 'QID', class: 'form-label' %>
+      <%= f.text_field :qid, class: 'form-control' %>
     </div>
     
-    <div>
-      <%= f.label :mbid, 'Musicbrainz ID'%>
-      <%= f.text_field :mbid %>
+    <div class="mb-3">
+      <%= f.label :mbid, 'Musicbrainz ID', class: 'form-label' %>
+      <%= f.text_field :mbid, class: 'form-control' %>
     </div>
     
-    <div>
-      <%= f.label :spotify_id, 'Spotify ID'%>
-      <%= f.text_field :spotify_id %>
+    <div class="mb-3">
+      <%= f.label :spotify_id, 'Spotify ID', class: 'form-label' %>
+      <%= f.text_field :spotify_id, class: 'form-control' %>
     </div>
 
-    <div>
-      <%= f.text_area :description, :rows => 8, :cols => 50 %>
+    <div class="mb-3">
+      <%= f.text_area :description, :rows => 8, :cols => 50, class: 'form-control' %>
     </div>
 
-    <div>
-      <%= f.label :cover, 'Direct Upload Cover'%>
-      <%= f.file_field :cover, direct_upload: true %>
+    <div class="mb-3">
+      <%= f.label :cover, 'Direct Upload Cover', class: 'form-label' %>
+      <%= f.file_field :cover, direct_upload: true, class: 'form-control'%>
     </div>
 
-    <div>
-      <%= f.label :cover_url, 'Cover URL (overrides direct upload)'%>
-      <%= f.text_field :cover_url %>
+    <div class="mb-3">
+      <%= f.label :cover_url, 'Cover URL (overrides direct upload)', class: 'form-label' %>
+      <%= f.text_field :cover_url, class: 'form-control' %>
     </div>
 
-    <div>
-      <%= f.submit 'Create or Update' %>
+    <div class="mb-5">
+      <%= f.submit 'Create or Update', class: 'btn btn-primary' %>
     </div>
   <% end %>
+  </div>
 </div>
