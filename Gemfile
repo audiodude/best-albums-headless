@@ -49,7 +49,7 @@ gem "bootsnap", require: false
 # gem "sassc-rails"
 
 # Devise for user/account creation and management.
-gem 'devise'
+gem "devise", "~> 4.8"
 
 # For outgoing RPC requests
 gem 'httpclient'
@@ -81,7 +81,3 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-
