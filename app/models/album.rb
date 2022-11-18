@@ -35,7 +35,7 @@ class Album < ApplicationRecord
       album: title,
       link: link,
       spotify_id: spotify_id,
-      photo_url_sm: cover.url,
+      photo_url_sm: cover.variant(resize_to_fit: [90, 80]).processed.url,
       photo_url_lg: cover.url,
       timestamp: created_at.to_time.to_i,
       slug: slug,
