@@ -56,8 +56,9 @@ gem "bootsnap", require: false
 # Devise for user/account creation and management.
 gem "devise", "~> 4.8"
 
-# For outgoing RPC requests
-gem 'httpclient'
+# For outgoing HTTP requests
+gem 'faraday'
+gem 'faraday-follow_redirects'
 
 # For displaying markdown
 gem 'redcarpet'

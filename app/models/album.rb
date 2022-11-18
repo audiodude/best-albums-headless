@@ -1,6 +1,6 @@
 class Album < ApplicationRecord
   has_one_attached :cover
-  before_validation :update_slug, :update_cover_url, :update_html
+  before_validation :update_slug, :update_html
 
   def self.json
     Album.all.order('created_at').map(&:to_legacy_dict)
@@ -10,22 +10,18 @@ class Album < ApplicationRecord
     self.slug = "#{artist} #{title}".parameterize.split('-')[0..3].join('-')
   end
 
-  def update_cover_url
-    return unless cover_url.empty?
-
-    self.cover_url = "https://coverartarchive.org/release-group/#{mbid.strip}/front-500"
-  end
-
   def update_cover!
-    if cover_url.empty? || cover.attached?
-      puts('Cover url is empty or cover was explicitly attached, returning')
-      return
+    return if cover.attached?
+    return if mbid.empty?
+
+    cover_url ||= "https://coverartarchive.org/release-group/#{mbid.strip}/front-500"
+    puts "cover url is #{cover_url}"
+
+    conn = Faraday.new(url: cover_url, headers: {'User-Agent' => 'BestAlbumsBot 0.1.0/Audiodude <audiodude@gmail.com>'}) do |f|
+      f.response :follow_redirects
     end
 
-    client = HTTPClient.new(default_header: {'User-Agent' => 'BestAlbumsBot 0.1.0/Audiodude <audiodude@gmail.com>'})
-    client.ssl_config.clear_cert_store
-    client.ssl_config.add_trust_ca('/usr/local/etc/openssl@1.1/cert.pem')
-    file = StringIO.new(client.get_content(cover_url))
+    file = StringIO.new(conn.get.body)
     self.cover.attach(io: file, filename: "cover#{cover_url[-4]}")
   end
 
