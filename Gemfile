@@ -14,6 +14,9 @@ gem "sprockets-rails"
 # Use MariaDB as the database for Active Record
 gem "mysql2"
 
+# Used for adding Bootstrap
+gem 'cssbundling-rails'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
