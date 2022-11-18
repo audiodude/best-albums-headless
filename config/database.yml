@@ -9,7 +9,8 @@ default: &default
 development:
   <<: *default
   database: best_albums_headless_development
-  socket: /tmp/mysql.sock
+  socket: /run/mysqld/mysqld.sock
+  password: <%= ENV["BEST_ALBUMS_DEV_DB_PASSWORD"] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -17,7 +18,8 @@ development:
 test:
   <<: *default
   database: best_albums_headless_test
-  socket: /tmp/mysql.sock
+  socket: /run/mysqld/mysqld.sock
+  password: <%= ENV["BEST_ALBUMS_DEV_DB_PASSWORD"] %>
 
 production:
   adapter: mysql2
