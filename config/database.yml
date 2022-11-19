@@ -28,4 +28,4 @@ production:
   database: best_albums_headless_production
   username: best_albums_headless
   password: <%= Rails.application.credentials.dig(:production, :database_password) %>
-  socket: /var/run/mysqld/mysqld.sock
+  socket: /run/mysqld/mysqld.sock
