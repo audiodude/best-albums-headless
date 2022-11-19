@@ -29,6 +29,4 @@ production:
   timeout: 5000
   database: best_albums_headless_production
   username: best_albums_headless
-  host: db.bestalbumsintheuniverse.com
-  port: 6612
-  password: <%= ENV["BEST_ALBUMS_DB_PASSWORD"] %>
+  socket: /var/run/mysqld/mysqld.sock
