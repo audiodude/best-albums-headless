@@ -79,6 +79,13 @@ group :development do
 
   gem 'rubocop'
   gem 'spring'
+
+  # Deployment
+  gem "capistrano", "~> 3.17"
+  gem "capistrano-rails", "~> 1.6"
+  gem "capistrano-passenger", "~> 0.2.1"
+  gem "capistrano-bundler", "~> 2.1"
+  gem "capistrano-rvm", "~> 0.1.2"
 end
 
 group :test do
@@ -87,3 +94,6 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+
+gem "capistrano-asdf", "~> 1.0"
