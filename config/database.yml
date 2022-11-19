@@ -29,4 +29,5 @@ production:
   timeout: 5000
   database: best_albums_headless_production
   username: best_albums_headless
+  password: <%= Rails.application.credentials.dig(:db, :password) %>
   socket: /var/run/mysqld/mysqld.sock
