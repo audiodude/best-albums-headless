@@ -31,4 +31,10 @@ namespace :best_albums do
       f.write({albums: Album.json}.to_json)
     } 
   end
+
+  desc 'Deploy the html site to nginx'
+  task deploy_web: :environment do
+    `rm -rf /var/www/best-albums`
+    `cp -ru _site /var/www/best-albums`
+  end
 end
