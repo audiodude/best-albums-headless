@@ -34,7 +34,7 @@ namespace :best_albums do
 
   desc 'Deploy the html site to nginx'
   task deploy_web: :environment do
-    `rm -rf /var/www/best-albums`
-    `cp -ru _site /var/www/best-albums`
+    `rm -rf /var/www/best-albums/*`
+    `cp -ru _site/* /var/www/best-albums/`
   end
 end
