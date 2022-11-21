@@ -36,6 +36,8 @@ vendor/bundle
 albums.json
 # Local Netlify folder
 .netlify
+# Gem output
+_gem
 
 /app/assets/builds/*
 !/app/assets/builds/.keep

@@ -29,7 +29,7 @@ namespace :best_albums do
   task build: :environment do
     File.open('_site/albums.json', 'w') {|f|
       f.write({albums: Album.json}.to_json)
-    } 
+    }
   end
 
   desc 'Deploy the html site to nginx'
@@ -38,5 +38,26 @@ namespace :best_albums do
     `cp -ru _site/* /var/www/best-albums/`
   end
 
-  desc ''
+  desc 'Deploy the gemini site to twins'
+  task deploy_gem: [:environment] do
+    `rm -rf _gem`
+    `mkdir -p _gem`
+
+    albums = Album.all.order('created_at DESC')
+
+    renderer = ActionController::Renderer.for(GemController)
+    File.open('_gem/index.gmi', 'w') do |f|
+      f.write(renderer.render(:template =>'gem/index', :locals => {albums: albums}))
+    end
+
+    albums.each do |album|
+      folder = "_gem/#{album.slug}"
+      `mkdir -p #{folder}`
+      File.open("#{folder}/index.gmi", 'w') do |f|
+        f.write(renderer.render(:template =>'gem/album', :locals => {album: album}))
+      end
+    end
+
+    `cp -ru _gem/* /var/gem/best-albums/`
+  end
 end
