@@ -1,5 +1,5 @@
-# <%= album.artist %>- <%= album.title %>
-=> https://open.spotify.com/album/<%= album.spotify_id %> On Spotify
--- Added <%= album.created_at.strftime("%Y-%m-%d") %> --
+# <%= raw album.artist %>- <%= raw album.title %>
+=> https://open.spotify.com/album/<%= raw album.spotify_id %> On Spotify
+-- Added <%= raw album.created_at.strftime("%Y-%m-%d") %> --
 
-<%= album.to_gemini %>
+<%= raw album.to_gemini %>

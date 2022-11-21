@@ -26,7 +26,15 @@ class Album < ApplicationRecord
   end
 
   def update_html
-    self.html = Markdown.new(description).to_html unless description.nil?
+    # This doesn't work, I get quotes escaped in my output
+    # markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(escape_html: false, xhtml: false))
+    # self.html = markdown.render(description)
+    
+    # This doesn't work either, sad face.
+    # self.html = Markdown.new(description).to_html(render_options = {escape_html: false}) unless description.nil?
+
+    # Just do this for now.
+    self.html = description
   end
 
   def to_legacy_dict

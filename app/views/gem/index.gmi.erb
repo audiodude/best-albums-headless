@@ -7,5 +7,5 @@ Taking note of the absolute best albums in the universe of music, mostly pop and
 Below find all of the albums that are considered the best, with a link to pages with Spotify URLs and more information.
 
 <% albums.each do |album| -%>
-=> /<%= album.slug %> <%= album.artist %> - <%= album.title %>
+=> /<%= raw album.slug %> <%= raw album.artist %> - <%= raw album.title %>
 <% end %>
