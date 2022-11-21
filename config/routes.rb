@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   root to: "home#index"
+
+  get 'gem/index', to: 'gem#index', formats: 'gmi'
+  get 'gem/:slug', to: 'gem#album', formats: 'gmi'
 end

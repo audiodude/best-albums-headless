@@ -43,4 +43,9 @@ class Album < ApplicationRecord
       html: html,
     }
   end
+
+  def to_gemini
+    # Strip known HTML
+    self.html.gsub(/<a href="[^"]+">([^<]+)<\/a>/, '\1').gsub(/<\/?(?:p|em|strong)>/, '')
+  end
 end

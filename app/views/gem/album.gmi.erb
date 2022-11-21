@@ -1,0 +1,5 @@
+# <%= @album.artist %>- <%= @album.title %>
+=> https://open.spotify.com/album/<%= @album.spotify_id %> On Spotify
+-- Added <%= @album.created_at.strftime("%Y-%m-%d") %> --
+
+<%= @album.to_gemini %>
