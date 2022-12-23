@@ -15,8 +15,6 @@ class Album < ApplicationRecord
     return if mbid.empty?
 
     cover_url ||= "https://coverartarchive.org/release-group/#{mbid.strip}/front-500"
-    puts "cover url is #{cover_url}"
-
     conn = Faraday.new(url: cover_url, headers: {'User-Agent' => 'BestAlbumsBot 0.1.0/Audiodude <audiodude@gmail.com>'}) do |f|
       f.response :follow_redirects
     end
