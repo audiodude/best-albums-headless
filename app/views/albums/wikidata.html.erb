@@ -1,0 +1,5 @@
+<%= form_for @album do |f| %>
+  <%= turbo_frame_tag 'album' do %>
+    <%= render 'form_album', f: f%>
+  <% end %>
+<% end %>

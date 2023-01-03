@@ -51,68 +51,45 @@ class AlbumsController < ApplicationController
     redirect_to albums_path
   end
 
-  def search
-    query = request.query_parameters['q']
-    client = HTTPClient.new default_header: {'User-Agent' => 'BestAlbumsBot 0.1.0/Audiodude <audiodude@gmail.com>'}
-
-    content = client.get_content(
-      'https://www.wikidata.org/w/api.php',
-      action: 'wbsearchentities',
-      search: query, language: 'en', format: 'json'
-    )
-    results = JSON.parse(content)
-    raise StandardError, 'Error from external endpoint' if results['success'] != 1
-
-    ids = results['search'].map { |r| "wd:#{r['id']}" }.join(' ')
-
-    if ids.empty?
-      render json: []
-      return
+  def wikidata
+    @album = Album.new
+    qid = params[:qid]
+    conn = Faraday.new(headers: {'User-Agent' => 'BestAlbumsBot 0.1.0/Audiodude <audiodude@gmail.com>'}) do |f|
+      f.response :follow_redirects
+      f.response :json
     end
 
-    sparql = <<-SPARQL
-      SELECT ?a ?aLabel ?r ?rLabel ?mbid ?spid ?date WHERE {
-        VALUES ?a { #{ids} }
-        ?a wdt:P31/wdt:P279* wd:Q482994 ;
-           wdt:P175 ?r .
-        OPTIONAL {
-          ?a wdt:P436 ?mbid .
-        }
-        OPTIONAL {
-          ?a wdt:P2205 ?spid .
-        }
-        OPTIONAL {
-          ?a wdt:P577 ?date
-        }
-        SERVICE wikibase:label {
-          bd:serviceParam wikibase:language "en" .
-        }
-      }
-    SPARQL
+    resp = conn.get("https://www.wikidata.org/wiki/Special:EntityData/#{qid}.json")
+    data = resp.body['entities'][qid]
 
-    res = client.post('https://query.wikidata.org/sparql', query: sparql, format: 'json')
-    data = JSON.parse(res.body)
-    albums = {}
+    @album.qid = qid
+    @album.title = data.dig('labels', 'en', 'value')
+    @album.mbid = data.dig('claims', 'P436', 0, 'mainsnak', 'datavalue', 'value')
+    @album.spotify_id = data.dig('claims', 'P2205', 0, 'mainsnak', 'datavalue', 'value')
+    artist_qid = data.dig('claims', 'P175', 0, 'mainsnak', 'datavalue', 'value', 'id')
+    release_time = data.dig('claims', 'P577', 0, 'mainsnak', 'datavalue', 'value', 'time')
+    @album.date = Time.strptime(release_time, '+%Y-%m-%dT%H:%M:%SZ').strftime('%Y-%m-%d')
+    @album.link = get_album_link(@album.mbid, data)
 
-    data['results']['bindings'].each do |b|
-      id_ = b['a']['value'].split('/')[-1]
-      next if albums.key?(id_)
+    resp = conn.get("https://www.wikidata.org/wiki/Special:EntityData/#{artist_qid}.json")
+    artist_data = resp.body['entities'][artist_qid]
+    @album.artist = artist_data.dig('labels', 'en', 'value')
 
-      a = {
-        id: id_,
-        title: b['aLabel']['value'],
-        artist: b['rLabel']['value'],
-        date: b['date'] && parse_date(b['date']['value']),
-        mbid: b['mbid'] && b['mbid']['value'],
-        spid: b['spid'] && b['spid']['value']
-      }
-      albums[id_] = a
-    end
 
-    render json: albums.values
+    # render json: data
   end
 
   private
+
+  def get_album_link(mbid, data)
+    return "https://musicbrainz.org/release-group/#{mbid}" if mbid
+
+    allmusic_id = data.dig('claims', 'P1729', 0, 'mainsnak', 'datavalue', 'value')
+    return "https://www.allmusic.com/album/#{allmusic_id}" if allmusic_id
+
+    amazon_id = data.dig('claims', 'P5749', 0, 'mainsnak', 'datavalue', 'value')
+    return "https://www.amazon.com/dp/#{amazon_id}" if amazon_id
+  end
 
   def album_params
     params.require(:album).permit(:title, :artist, :date, :link, :description, :qid, :mbid, :spotify_id, :cover, :cover_url)

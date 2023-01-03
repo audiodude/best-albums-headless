@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  get 'albums/wikidata/:qid', to: 'albums#wikidata', as: 'album_wikidata'
   resources :albums
-  get 'albums/search'
   devise_for :users
 
   root to: "home#index"
