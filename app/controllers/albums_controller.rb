@@ -68,15 +68,19 @@ class AlbumsController < ApplicationController
     @album.spotify_id = data.dig('claims', 'P2205', 0, 'mainsnak', 'datavalue', 'value')
     artist_qid = data.dig('claims', 'P175', 0, 'mainsnak', 'datavalue', 'value', 'id')
     release_time = data.dig('claims', 'P577', 0, 'mainsnak', 'datavalue', 'value', 'time')
-    @album.date = Time.strptime(release_time, '+%Y-%m-%dT%H:%M:%SZ').strftime('%Y-%m-%d')
+
+    begin
+      @album.date = Time.strptime(release_time, '+%Y-%m-%dT%H:%M:%SZ').strftime('%Y-%m-%d')
+    rescue ArgumentError
+      idx = release_time.index('-00')
+      @album.date = release_time[1,idx - 1]
+    end
+
     @album.link = get_album_link(@album.mbid, data)
 
     resp = conn.get("https://www.wikidata.org/wiki/Special:EntityData/#{artist_qid}.json")
     artist_data = resp.body['entities'][artist_qid]
     @album.artist = artist_data.dig('labels', 'en', 'value')
-
-
-    # render json: data
   end
 
   private
