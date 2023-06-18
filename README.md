@@ -1,4 +1,13 @@
-# README
+# Headless CMS for https://bestalbumsintheuniverse.com
+
+## Overview
+
+Building off the [original version](https://github.com/audiodude/best-albums) of this site, the current version
+attempts to streamline the editing and image capturing workflows. To this end, the admin interface, written
+in Ruby on Rails, is deployed to a cloud service along with the site database. The served site is still static,
+and still depends on an albums.json file served from its root.
+
+For more information on this project, see my [digital garden](https://garden.travisbriggs.com/garden/best%20albums%20in%20the%20universe/)
 
 ## Building the albums.json for the static website
 
