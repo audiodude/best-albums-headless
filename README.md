@@ -26,7 +26,7 @@ Host admin.bestalbumsintheuniverse.com
 Finally, use the following command from this directory:
 
 ```bash
-$ bundle exec cap production invoke:rake TASK=best_albums:build
+bundle exec cap production invoke:rake TASK=best_albums:build
 ```
 
 ## Deploying the static app
@@ -34,7 +34,7 @@ $ bundle exec cap production invoke:rake TASK=best_albums:build
 To deploy the static app at bestalbumsintheuniverse.com, use this command:
 
 ```bash
-$ bundle exec cap production invoke:rake TASK=best_albums:deploy_web
+bundle exec cap production invoke:rake TASK=best_albums:deploy_web
 ```
 
 ## Deploying the gemini site
@@ -42,5 +42,5 @@ $ bundle exec cap production invoke:rake TASK=best_albums:deploy_web
 To deploy the gemini site at gem.bestalbumsintheuniverse.com, use this command:
 
 ```bash
-$ bundle exec cap production invoke:rake TASK=best_albums:deploy_gem
+bundle exec cap production invoke:rake TASK=best_albums:deploy_gem
 ```
