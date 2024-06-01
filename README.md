@@ -44,3 +44,33 @@ To deploy the gemini site at gem.bestalbumsintheuniverse.com, use this command:
 ```bash
 bundle exec cap production invoke:rake TASK=best_albums:deploy_gem
 ```
+
+## Broken ASDF
+
+If you're using ASDF on macOS and it seems broken, aka you're getting error messages like:
+
+```
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems.rb:283:in `find_spec_for_exe': Could not find 'bundler' (2.5.11) required by your /Users/tmoney/code/best-albums-headless/Gemfile.lock. (Gem::GemNotFoundException)
+To update to the latest version installed on your system, run `bundle update --bundler`.
+To install the missing version, run `gem install bundler:2.5.11`
+```
+
+You can prefix with `asdf exec`, like this:
+
+```bash
+asdf exec bundle exec ...
+```
+
+## Capistrano ASDF wrapper
+
+If you get the following error when doing a `cap` command:
+
+```
+rake stderr: bash: line 1: /var/www/best-albums-headless/shared/asdf-wrapper: No such file or directory
+```
+
+Make sure the ASDF wrapper is installed on the server with:
+
+```bash
+cap production asdf:upload_wrapper
+```
