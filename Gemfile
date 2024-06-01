@@ -81,7 +81,7 @@ group :development do
   gem 'spring'
 
   # Deployment
-  gem "capistrano", "~> 3.17"
+  gem "capistrano", "~> 3.17.1"
   gem "capistrano-rails", "~> 1.6"
   gem "capistrano-passenger", "~> 0.2.1"
   gem "capistrano-bundler", "~> 2.1"

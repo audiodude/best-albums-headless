@@ -93,7 +93,7 @@ GEM
     bootsnap (1.18.3)
       msgpack (~> 1.2)
     builder (3.2.4)
-    capistrano (3.18.1)
+    capistrano (3.17.3)
       airbrussh (>= 1.0.0)
       i18n
       rake (>= 10.0.0)
@@ -357,7 +357,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk-s3
   bootsnap
-  capistrano (~> 3.17)
+  capistrano (~> 3.17.1)
   capistrano-asdf (~> 1.0)
   capistrano-bundler (~> 2.1)
   capistrano-passenger (~> 0.2.1)
